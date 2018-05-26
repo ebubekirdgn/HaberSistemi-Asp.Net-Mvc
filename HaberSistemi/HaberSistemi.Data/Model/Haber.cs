@@ -14,13 +14,26 @@ namespace HaberSistemi.Data.Model
         [Key]
         public int ID { get; set; }
 
+        [Display(Name = "Açıklama"), MaxLength(255, ErrorMessage = "Max 255 karakter girebilirsiniz.")]
+        [Required]
         public string Baslik { get; set; }
+
+        [Display(Name = "Kısa Açıklama"), MaxLength(50, ErrorMessage = "Max 50 karakter girebilirsiniz.")]
         public string KisaAciklama { get; set; }
+
+        [Display(Name = "Açıklama")]
         public string Aciklama { get; set; }
+
+        [Display(Name = "Aktif")]
         public bool IsActive { get; set; }
+
+        [Display(Name = "Resim")]
+        public string Resim { get; set; }
+
+        [Display(Name = "Eklenme Tarihi")]
         public DateTime EklenmeTarihi { get; set; }
 
         public virtual Kullanici Kullanici { get; set; }
-        public string Resim { get; set; }
+        public virtual ICollection<Resim> Resim { get; set; }
     }
 }
