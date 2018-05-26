@@ -48,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext\HaberContext.cs" />
+    <Compile Include="Migrations\201805261420511_Olustur.cs" />
+    <Compile Include="Migrations\201805261420511_Olustur.Designer.cs">
+      <DependentUpon>201805261420511_Olustur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Haber.cs" />
     <Compile Include="Model\Kullanici.cs" />
     <Compile Include="Model\Rol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +61,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805261420511_Olustur.resx">
+      <DependentUpon>201805261420511_Olustur.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
