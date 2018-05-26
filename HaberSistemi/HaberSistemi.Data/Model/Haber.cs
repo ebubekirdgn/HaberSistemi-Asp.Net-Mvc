@@ -27,6 +27,8 @@ namespace HaberSistemi.Data.Model
         [Display(Name = "Aktif")]
         public bool IsActive { get; set; }
 
+        public int OkunmaSayisi { get; set; }
+
         [Display(Name = "Resim")]
         public string Resim { get; set; }
 
@@ -34,6 +36,6 @@ namespace HaberSistemi.Data.Model
         public DateTime EklenmeTarihi { get; set; }
 
         public virtual Kullanici Kullanici { get; set; }
-        public virtual ICollection<Resim> Resim { get; set; }
+        public virtual ICollection<Resim> Resims { get; set; }
     }
 }

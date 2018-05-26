@@ -48,9 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext\HaberContext.cs" />
+    <Compile Include="Infrastructure\IRepostitory.cs" />
     <Compile Include="Migrations\201805261420511_Olustur.cs" />
     <Compile Include="Migrations\201805261420511_Olustur.Designer.cs">
       <DependentUpon>201805261420511_Olustur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805261550585_Olustur1.cs" />
+    <Compile Include="Migrations\201805261550585_Olustur1.Designer.cs">
+      <DependentUpon>201805261550585_Olustur1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Haber.cs" />
@@ -66,6 +71,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805261420511_Olustur.resx">
       <DependentUpon>201805261420511_Olustur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805261550585_Olustur1.resx">
+      <DependentUpon>201805261550585_Olustur1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

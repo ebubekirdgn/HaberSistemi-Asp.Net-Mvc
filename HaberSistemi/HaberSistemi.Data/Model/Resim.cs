@@ -14,7 +14,7 @@ namespace HaberSistemi.Data.Model
         [Key]
         public int ID { get; set; }
 
-        public string Resim { get; set; }
+        public string ResimUrl { get; set; }
 
         public virtual Haber Haber { get; set; }
     }
