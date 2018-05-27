@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext\HaberContext.cs" />
-    <Compile Include="Infrastructure\IRepostitory.cs" />
     <Compile Include="Migrations\201805261420511_Olustur.cs" />
     <Compile Include="Migrations\201805261420511_Olustur.Designer.cs">
       <DependentUpon>201805261420511_Olustur.cs</DependentUpon>
