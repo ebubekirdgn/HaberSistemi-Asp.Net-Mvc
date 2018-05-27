@@ -1,6 +1,5 @@
 namespace HaberSistemi.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
 
     public partial class Olustur : DbMigration

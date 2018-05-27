@@ -1,8 +1,8 @@
+using HaberSistemi.Service.Areas.HelpPage.ModelDescriptions;
+using HaberSistemi.Service.Areas.HelpPage.Models;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using HaberSistemi.Service.Areas.HelpPage.ModelDescriptions;
-using HaberSistemi.Service.Areas.HelpPage.Models;
 
 namespace HaberSistemi.Service.Areas.HelpPage.Controllers
 {
