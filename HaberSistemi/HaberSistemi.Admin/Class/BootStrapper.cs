@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using HaberSistemi.Core.Infrastructure;
+using HaberSistemi.Core.Repostitory;
 using System.Web.Mvc;
 
 namespace HaberSistemi.Admin.Class
@@ -16,7 +18,12 @@ namespace HaberSistemi.Admin.Class
         private static void BuildAutoFac()
         {
             var builder = new ContainerBuilder();
+
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterType<HaberRepository>().As<IHaberRepository>();
+            builder.RegisterType<KullaniciRepository>().As<IKullaniciRepository>();
+            builder.RegisterType<RolRepository>().As<IRolRepository>();
+            builder.RegisterType<ResimRepository>().As<IResimRepository>();
 
             var container = builder.Build();
 

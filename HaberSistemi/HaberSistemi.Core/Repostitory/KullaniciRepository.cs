@@ -33,7 +33,7 @@ namespace HaberSistemi.Core.Repostitory
             var KullaniciAl = GetById(id);
             if (KullaniciAl != null)
             {
-                _context.Resim.Remove(KullaniciAl);
+                _context.Kullanici.Remove(KullaniciAl);
             }
         }
 
