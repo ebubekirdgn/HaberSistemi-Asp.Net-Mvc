@@ -42,10 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\IHaberRepository.cs" />
+    <Compile Include="Infrastructure\IKullaniciRepository.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Infrastructure\IResimRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repostitory\HaberRepository.cs" />
+    <Compile Include="Repostitory\KullaniciRepository.cs" />
     <Compile Include="Repostitory\ResimRepository.cs" />
   </ItemGroup>
   <ItemGroup />
