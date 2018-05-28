@@ -131,6 +131,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\css\sb-admin.css" />
     <Content Include="Scripts\css\sb-admin.min.css" />
+    <Content Include="Scripts\Global.js" />
     <Content Include="Scripts\js\sb-admin-charts.js" />
     <Content Include="Scripts\js\sb-admin-charts.min.js" />
     <Content Include="Scripts\js\sb-admin-datatables.js" />
@@ -146,6 +147,7 @@
     <Compile Include="Class\BootStrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KategoriController.cs" />
     <Compile Include="CustomFilter\LoginFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -201,6 +203,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Kategori\Ekle.cshtml" />
+    <Content Include="Views\Kategori\Listele.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

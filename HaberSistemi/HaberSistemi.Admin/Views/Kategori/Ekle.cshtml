@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Global.js"></script>
+<form>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="inputEmail4">Kategori Adı</label>
+            <input type="email" class="form-control" id="KategoriAdi" placeholder="Kategori Adı">
+        </div>
+        <div class="form-group col-md-8">
+            <label for="inputPassword4">URL</label>
+            <input type="text" class="form-control" id="KategoriUrl" placeholder="URL">
+        </div>
+        <div class="form-group col-md-8">
+            <label for="inputState">Kategoriler</label>
+            <select id="inputState" class="form-control">
+                <option selected>Kategoriler Gelecek</option>
+                <option>...</option>
+            </select>
+        </div>
+        <div class="form-group col-md-8">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="KategoriAktif" checked>
+                <label class="form-check-label" for="gridCheck">
+                    Aktif Mi?
+                </label>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="btn btn-primary" onclick="KategoriEkle();">Kaydet</a>
+</form>

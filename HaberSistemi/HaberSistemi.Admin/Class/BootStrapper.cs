@@ -24,6 +24,7 @@ namespace HaberSistemi.Admin.Class
             builder.RegisterType<KullaniciRepository>().As<IKullaniciRepository>();
             builder.RegisterType<RolRepository>().As<IRolRepository>();
             builder.RegisterType<ResimRepository>().As<IResimRepository>();
+            builder.RegisterType<KategoriRepository>().As<IKategoriRepository>();
 
             var container = builder.Build();
 
