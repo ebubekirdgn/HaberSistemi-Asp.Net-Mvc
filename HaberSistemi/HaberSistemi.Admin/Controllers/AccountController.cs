@@ -31,6 +31,18 @@ namespace HaberSistemi.Admin.Controllers
         public ActionResult Login(Kullanici kullanici)
         {
             var kullaniciVarMi = _kullaniciRepository.GetMany(x => x.Email == kullanici.Email && x.Sifre == kullanici.Sifre && x.IsActive == true).SingleOrDefault();
+            if (kullaniciVarMi != null)
+            {
+                if (kullaniciVarMi.Rol.RolAdi == "Admin")
+                {
+                    Session["KullaniciEmail"] = kullaniciVarMi.Email; // Sessiona kullanıcının email bilgisi yuklendi.
+                    return RedirectToAction("Index", "Home");
+                }
+                ViewBag.Mesaj = "Yetkisiz Kullanıcı";
+                return View();
+            }
+
+            ViewBag.Mesaj = "Kullanıcı Bulunamadı.";
             return View();
         }
     }
