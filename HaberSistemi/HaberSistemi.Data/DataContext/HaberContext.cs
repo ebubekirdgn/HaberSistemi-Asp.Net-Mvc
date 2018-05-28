@@ -9,5 +9,6 @@ namespace HaberSistemi.Data.DataContext
         public DbSet<Kullanici> Kullanici { get; set; }
         public DbSet<Haber> Haber { get; set; }
         public DbSet<Resim> Resim { get; set; }
+        public DbSet<Kategori> Kategori { get; set; }
     }
 }
