@@ -6,7 +6,7 @@ namespace HaberSistemi.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(HaberSistemi.Data.DataContext.HaberContext context)
