@@ -10,7 +10,7 @@ namespace HaberSistemi.Data.Model
         [Key]
         public int ID { get; set; }
 
-        [MinLength(2, ErrorMessage = "En az {0} karakter olmalıdır."), MaxLength(150, ErrorMessage = "{0}'den fazla girmeyiniz")]
+        [Required, MinLength(2, ErrorMessage = "En az {0} karakter olmalıdır."), MaxLength(150, ErrorMessage = "{0}'den fazla girmeyiniz")]
         public string KategoriAdi { get; set; }
 
         public int ParentID { get; set; }

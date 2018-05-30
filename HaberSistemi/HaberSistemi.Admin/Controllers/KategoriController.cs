@@ -38,7 +38,7 @@ namespace HaberSistemi.Admin.Controllers
                 _kategoriRepository.Save();
                 return Json(new ResultJson { Success = true, Message = "Kategori ekleme işleminiz başarılı." });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Json(new ResultJson { Success = false, Message = "Hata Oluştu!." });
             }
