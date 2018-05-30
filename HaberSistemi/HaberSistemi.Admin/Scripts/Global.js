@@ -1,6 +1,6 @@
 ﻿function KategoriEkle() {
     Kategori = new Object();
-    Kategori.Adi = $("#KategoriAdi").val(); // Kategori Adı textindeki değer alınıyor.
+    Kategori.KategoriAdi = $("#KategoriAdi").val(); // Kategori Adı textindeki değer alınıyor.
     Kategori.Url = $("#KategoriUrl").val(); // Kategori Url textindeki değer alınıyor.
     Kategori.IsActive = $("#KategoriAktif").is(":checked");
 
@@ -8,15 +8,18 @@
         url: "Kategori/Ekle",
         data: Kategori,
         type: "POST",
+        datatype: 'json',
         success: function (response) {
-            if (response.success) {
-                alert(1);
+            if (response.Success) {
+                bootbox.alert(response.Message, function () {
+                    location.reload();
+                });
             }
             else {
-                alert(2);
+                bootbox.alert(response.Message, function () {
+                    //TO DO :geri döndüğünde birşey yapılması isteniyorsa
+                });
             }
         }
     });
-
-    alert(Kategori.Adi + Kategori.Url + Kategori.Url + Kategori.IsActive);
 }

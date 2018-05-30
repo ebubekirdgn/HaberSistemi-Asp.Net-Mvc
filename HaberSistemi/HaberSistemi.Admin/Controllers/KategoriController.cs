@@ -1,9 +1,7 @@
-﻿using HaberSistemi.Core.Infrastructure;
+﻿using HaberSistemi.Admin.Class;
+using HaberSistemi.Core.Infrastructure;
 using HaberSistemi.Data.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace HaberSistemi.Admin.Controllers
@@ -34,7 +32,16 @@ namespace HaberSistemi.Admin.Controllers
         [HttpPost]
         public JsonResult Ekle(Kategori kategori)
         {
-            return Json(1, JsonRequestBehavior.AllowGet);
+            try
+            {
+                _kategoriRepository.Insert(kategori);
+                _kategoriRepository.Save();
+                return Json(new ResultJson { Success = true, Message = "Kategori ekleme işleminiz başarılı." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new ResultJson { Success = false, Message = "Hata Oluştu!." });
+            }
         }
 
         public ActionResult Listele()

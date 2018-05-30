@@ -63,15 +63,10 @@
     <div class="content-wrapper">
         <div class="container-fluid">
             <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="index.html">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">Blank Page</li>
-            </ol>
+             
             <div class="row">
                 <div class="col-12">
-                    <p>@RenderBody()</p>
+                    @RenderBody()
                 </div>
             </div>
         </div>
@@ -128,5 +123,7 @@
     <!-- Custom scripts for this page-->
     <script src="~/Scripts/js/sb-admin-datatables.min.js"></script>
     <script src="~/Scripts/js/sb-admin-charts.min.js"></script>
+    <script src="~/Scripts/Global.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
 </body>
 </html>
