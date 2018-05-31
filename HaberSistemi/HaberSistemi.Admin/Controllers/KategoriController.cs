@@ -22,7 +22,7 @@ namespace HaberSistemi.Admin.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(_kategoriRepository.GetAll().ToList());
         }
 
         public ActionResult Ekle()
@@ -50,6 +50,18 @@ namespace HaberSistemi.Admin.Controllers
         {
             var KategoriList = _kategoriRepository.GetMany(x => x.ParentID == 0).ToList();
             ViewBag.Kategori = KategoriList;
+        }
+
+        public ActionResult Sil(int id)
+        {
+            Kategori dbKategori = _kategoriRepository.GetById(id);
+            if (dbKategori == null)
+            {
+                throw new Exception("Kategori Bulunamadı.");
+            }
+            _kategoriRepository.Delete(id);
+            _kategoriRepository.Save();
+            return RedirectToAction("Index", "Kategori");
         }
     }
 }

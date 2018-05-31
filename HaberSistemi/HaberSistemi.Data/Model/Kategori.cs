@@ -21,5 +21,6 @@ namespace HaberSistemi.Data.Model
         public bool IsActive { get; set; }
 
         public virtual ICollection<Haber> Haber { get; set; }
+        public virtual Kullanici Kullanici { get; set; }
     }
 }

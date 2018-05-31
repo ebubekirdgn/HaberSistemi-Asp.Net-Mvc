@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin - Start Bootstrap Template</title>
+    <title>@ViewBag.Title</title>
     <!-- Bootstrap core CSS-->
     <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
     <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <!-- Page level plugin CSS-->
     <link href="~/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
@@ -27,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="@Url.Action("Index","Home")">
                         <i class="fa fa-fw fa-dashboard"></i>
                         <span class="nav-link-text">Anasayfa</span>
                     </a>
@@ -39,7 +41,7 @@
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseComponents">
                         <li><a href="@Url.Action("Ekle","Kategori")">Kategori Ekle </a></li>
-                        <li><a href="@Url.Action("Listele","Kategori")">Kategori Listele </a></li>
+                        <li><a href="@Url.Action("Index","Kategori")">Kategori Listele </a></li>
                     </ul>
                 </li>
             </ul>

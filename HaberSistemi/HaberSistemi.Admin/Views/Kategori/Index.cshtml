@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<HaberSistemi.Data.Model.Kategori>
+
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-table"></i> Kategori Listesi
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th><span class="fa fa-key"></span> </th>
+                            <th>Kategori Adı</th>
+                            <th>Üst Kategori</th>
+                            <th>Durum</th>
+                            <th>Ekleyen</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td><span class=""></span> @item.ID</td>
+                                <td>@item.KategoriAdi</td>
+                                <td>@item.ParentID</td>
+                                <td>
+
+                                    @if (item.IsActive == true)
+                                    {
+                                        <b class="fa fa-"> Aktif</b>
+                                    }
+                                    else
+                                    {
+                                        <b class="fa fa-warning">Pasif</b>
+                                    }
+                                </td>
+                                <td>@item.Kullanici.AdSoyad</td>
+                                <td>
+                                    <button class="btn btn-success btn-sm">Düzenle</button>
+                                 @Html.ActionLink("Sil","Sil",new { ID = item.ID},  new { onclick="return confirm('Kaydı silmek istediğinizden emin misiniz?');" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+</div>
