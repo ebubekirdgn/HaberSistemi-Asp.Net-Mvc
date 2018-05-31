@@ -3,7 +3,8 @@
     Kategori.KategoriAdi = $("#KategoriAdi").val(); // Kategori Adı textindeki değer alınıyor.
     Kategori.URL = $("#KategoriUrl").val(); // Kategori Url textindeki değer alınıyor.
     Kategori.IsActive = $("#KategoriAktif").is(":checked");
-    bootbox.alert("asdasd");
+    Kategori.ParentID = $("#ParentID").val();
+    alert(Kategori.ParentID);
     $.ajax({
         url: "/Kategori/Ekle",
         data: Kategori,

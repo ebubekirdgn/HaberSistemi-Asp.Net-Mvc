@@ -2,6 +2,7 @@
 using HaberSistemi.Core.Infrastructure;
 using HaberSistemi.Data.Model;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace HaberSistemi.Admin.Controllers
@@ -26,6 +27,7 @@ namespace HaberSistemi.Admin.Controllers
 
         public ActionResult Ekle()
         {
+            SetKategoriListele();
             return View();
         }
 
@@ -44,15 +46,10 @@ namespace HaberSistemi.Admin.Controllers
             }
         }
 
-        public ActionResult Listele()
+        public void SetKategoriListele()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Listele(Kategori kategori)
-        {
-            return View();
+            var KategoriList = _kategoriRepository.GetMany(x => x.ParentID == 0).ToList();
+            ViewBag.Kategori = KategoriList;
         }
     }
 }

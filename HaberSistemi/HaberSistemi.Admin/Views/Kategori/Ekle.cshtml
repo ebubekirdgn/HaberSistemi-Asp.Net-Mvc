@@ -1,9 +1,14 @@
-﻿@{
+﻿@model HaberSistemi.Data.Model.Kategori
+@{
     ViewBag.Title = "Ekle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <form>
     <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="inputState">Üst Kategoriler</label>
+            @Html.DropDownListFor(model => model.KategoriAdi, new SelectList(ViewBag.Kategori, "ID", "KategoriAdi"), ("Seçiniz"), new { @class = "form-control", id = "ParentID" })
+        </div>
         <div class="form-group col-md-8">
             <label for="inputEmail4">Kategori Adı</label>
             <input type="email" class="form-control" id="KategoriAdi" placeholder="Kategori Adı">
@@ -11,13 +16,6 @@
         <div class="form-group col-md-8">
             <label for="inputPassword4">URL</label>
             <input type="text" class="form-control" id="KategoriUrl" placeholder="URL">
-        </div>
-        <div class="form-group col-md-8">
-            <label for="inputState">Kategoriler</label>
-            <select id="inputState" class="form-control">
-                <option selected>Kategoriler Gelecek</option>
-                <option>...</option>
-            </select>
         </div>
         <div class="form-group col-md-8">
             <div class="form-check">
