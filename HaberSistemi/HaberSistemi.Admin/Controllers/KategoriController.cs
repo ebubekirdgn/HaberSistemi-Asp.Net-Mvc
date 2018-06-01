@@ -52,16 +52,16 @@ namespace HaberSistemi.Admin.Controllers
             ViewBag.Kategori = KategoriList;
         }
 
-        public ActionResult Sil(int id)
+        public JsonResult Sil(int id)
         {
             Kategori dbKategori = _kategoriRepository.GetById(id);
             if (dbKategori == null)
             {
-                throw new Exception("Kategori Bulunamadı.");
+                return Json(new ResultJson { Success = true, Message = "Kategori Bulunamadı." });
             }
             _kategoriRepository.Delete(id);
             _kategoriRepository.Save();
-            return RedirectToAction("Index", "Kategori");
+            return Json(new ResultJson { Success = true, Message = "Kategori Silindi." });
         }
     }
 }
