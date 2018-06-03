@@ -20,10 +20,7 @@ namespace HaberSistemi.Admin.Controllers
 
         #endregion Kategori
 
-        public ActionResult Index()
-        {
-            return View(_kategoriRepository.GetAll().ToList());
-        }
+        #region KategoriEkle
 
         public ActionResult Ekle()
         {
@@ -46,11 +43,24 @@ namespace HaberSistemi.Admin.Controllers
             }
         }
 
+        #endregion KategoriEkle
+
+        #region KategoriListele
+
+        public ActionResult Index()
+        {
+            return View(_kategoriRepository.GetAll().ToList());
+        }
+
         public void SetKategoriListele()
         {
             var KategoriList = _kategoriRepository.GetMany(x => x.ParentID == 0).ToList();
             ViewBag.Kategori = KategoriList;
         }
+
+        #endregion KategoriListele
+
+        #region KategoriSil
 
         public JsonResult Sil(int id)
         {
@@ -63,5 +73,27 @@ namespace HaberSistemi.Admin.Controllers
             _kategoriRepository.Save();
             return Json(new ResultJson { Success = true, Message = "Kategori Silindi." });
         }
+
+        #endregion KategoriSil
+
+        #region KategoriDüzenle
+
+        public ActionResult Duzenle(int id)
+        {
+            Kategori dbKategori = _kategoriRepository.GetById(id);
+            if (dbKategori == null)
+            {
+                throw new Exception("Kategori Bulunamadı.");
+            }
+            SetKategoriListele();
+            return View(dbKategori);
+        }
+
+        public JsonResult Duzenle(Kategori kategori)
+        {
+            return Json(1);
+        }
+
+        #endregion KategoriDüzenle
     }
 }
