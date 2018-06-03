@@ -1,4 +1,5 @@
 ﻿using HaberSistemi.Admin.Class;
+using HaberSistemi.Admin.CustomFilter;
 using HaberSistemi.Core.Infrastructure;
 using HaberSistemi.Data.Model;
 using System;
@@ -78,6 +79,8 @@ namespace HaberSistemi.Admin.Controllers
 
         #region KategoriDüzenle
 
+        [HttpGet]
+        [LoginFilter]
         public ActionResult Duzenle(int id)
         {
             Kategori dbKategori = _kategoriRepository.GetById(id);
@@ -89,9 +92,21 @@ namespace HaberSistemi.Admin.Controllers
             return View(dbKategori);
         }
 
+        [HttpPost]
+        [LoginFilter]
         public JsonResult Duzenle(Kategori kategori)
         {
-            return Json(1);
+            Kategori dbKategori = _kategoriRepository.GetById(kategori.ID);
+
+            dbKategori.IsActive = kategori.IsActive;
+            dbKategori.KategoriAdi = kategori.KategoriAdi;
+            dbKategori.ParentID = kategori.ParentID;
+            dbKategori.URL = kategori.URL;
+            _kategoriRepository.Save();
+
+            return Json(new ResultJson { Success = true, Message = "Düzenleme İşlemi Başarılı." });
+
+            // return Json(new ResultJson { Success = false, Message = "Düzenleme İşlemi Sırasında Hata!." });
         }
 
         #endregion KategoriDüzenle

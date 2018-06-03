@@ -7,8 +7,8 @@
 
 <div class="container-fluid">
     <form>
-        @Html.HiddenFor(x => x.ID)
         <div class="form-row">
+            @Html.HiddenFor(x => x.ID)
             <div class="form-group col-md-8">
                 <label for="inputState">Üst Kategoriler</label>
                 @Html.DropDownListFor(model => model.KategoriAdi, new SelectList(ViewBag.Kategori, "ID", "KategoriAdi"), ("Seçiniz"), new { @class = "form-control", id = "ParentID" })
@@ -20,18 +20,13 @@
             <div class="form-group col-md-8">
                 <label for="inputPassword4">URL</label>
                 @Html.TextBoxFor(x => x.URL, new { @class = "form-control", id = "KategoriUrl", placeholer = "URL" })
-
-                <input type="text" class="form-control" id="KategoriUrl" placeholder="URL">
             </div>
             <div class="form-group col-md-8">
                 <div class="form-check">
-                    @Html.CheckBoxFor(x => x.IsActive, new { @checked = "checked", id = "KategoriAktif" })
-                    <label class="form-check-label" for="gridCheck">
-                        Aktif Mi?
-                    </label>
+                    @Html.CheckBoxFor(x => x.IsActive, new { @checked = "checked", id = "KategoriAktif" }) Aktif Mi?
                 </div>
             </div>
         </div>
-        <a href="#" class="btn btn-primary" onclick="KategoriEkle();">Kaydet</a>
+        <a href="#" class="btn btn-primary" onclick="KategoriDuzenle();">Güncelle</a>
     </form>
 </div>
