@@ -7,13 +7,13 @@ namespace HaberSistemi.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Olustur1 : IMigrationMetadata
+    public sealed partial class Olustur : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Olustur1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Olustur));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805261550585_Olustur1"; }
+            get { return "201806051439394_Olustur"; }
         }
         
         string IMigrationMetadata.Source

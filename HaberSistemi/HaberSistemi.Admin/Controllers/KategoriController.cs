@@ -98,7 +98,7 @@ namespace HaberSistemi.Admin.Controllers
         {
             Kategori dbKategori = _kategoriRepository.GetById(kategori.ID);
 
-            dbKategori.IsActive = kategori.IsActive;
+            dbKategori.AktifMi = kategori.AktifMi;
             dbKategori.KategoriAdi = kategori.KategoriAdi;
             dbKategori.ParentID = kategori.ParentID;
             dbKategori.URL = kategori.URL;

@@ -6,11 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HaberSistemi.Data.Model
 {
     [Table("Haber")]
-    public class Haber
+    public class Haber : BaseEntity
     {
-        [Key]
-        public int ID { get; set; }
-
         [Display(Name = "Açıklama"), MaxLength(255, ErrorMessage = "Max 255 karakter girebilirsiniz.")]
         [Required]
         public string Baslik { get; set; }
@@ -21,16 +18,10 @@ namespace HaberSistemi.Data.Model
         [Display(Name = "Açıklama")]
         public string Aciklama { get; set; }
 
-        [Display(Name = "Aktif")]
-        public bool IsActive { get; set; }
-
         public int OkunmaSayisi { get; set; }
 
         [Display(Name = "Resim")]
         public string Resim { get; set; }
-
-        [Display(Name = "Eklenme Tarihi")]
-        public DateTime EklenmeTarihi { get; set; }
 
         public virtual Kullanici Kullanici { get; set; }
         public virtual ICollection<Resim> Resims { get; set; }

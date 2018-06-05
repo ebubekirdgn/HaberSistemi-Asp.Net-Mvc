@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HaberSistemi.Data.Model
 {
     [Table("Rol")]
-    public class Rol
+    public class Rol : BaseEntity
     {
-        [Key]
-        public int ID { get; set; }
-
         [Display(Name = "Rol Adı")]
         [MinLength(3, ErrorMessage = "Lütfen 3 karakterden fazla değer girmeyiniz."), MaxLength(20, ErrorMessage = "Lütfen 20 karakterden fazla değer girmeyiniz.")]
         public string RolAdi { get; set; }

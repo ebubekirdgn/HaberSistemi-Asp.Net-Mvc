@@ -5,11 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HaberSistemi.Data.Model
 {
     [Table("Kategori")]
-    public class Kategori
+    public class Kategori : BaseEntity
     {
-        [Key]
-        public int ID { get; set; }
-
         [Required, MinLength(2, ErrorMessage = "En az {0} karakter olmalıdır."), MaxLength(150, ErrorMessage = "{0}'den fazla girmeyiniz")]
         public string KategoriAdi { get; set; }
 
@@ -17,8 +14,6 @@ namespace HaberSistemi.Data.Model
 
         [MinLength(2, ErrorMessage = "En az {0} karakter olmalıdır."), MaxLength(150, ErrorMessage = "{0}'den fazla girmeyiniz")]
         public string URL { get; set; }
-
-        public bool IsActive { get; set; }
 
         public virtual ICollection<Haber> Haber { get; set; }
         public virtual Kullanici Kullanici { get; set; }

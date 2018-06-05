@@ -5,11 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HaberSistemi.Data.Model
 {
     [Table("Kullanici")]
-    public class Kullanici
+    public class Kullanici : BaseEntity
     {
-        [Key]
-        public int ID { get; set; }
-
         [Display(Name = "Adı Soyadı")]
         public string AdSoyad { get; set; }
 
@@ -23,9 +20,6 @@ namespace HaberSistemi.Data.Model
 
         [Display(Name = "Kayıt Tarihi")]
         public DateTime KayitTarihi { get; set; }
-
-        [Display(Name = "Aktif")]
-        public bool IsActive { get; set; }
 
         public virtual Rol Rol { get; set; }
     }

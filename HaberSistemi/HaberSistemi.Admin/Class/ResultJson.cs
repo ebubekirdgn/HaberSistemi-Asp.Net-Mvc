@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace HaberSistemi.Admin.Class
+﻿namespace HaberSistemi.Admin.Class
 {
     public class ResultJson
     {

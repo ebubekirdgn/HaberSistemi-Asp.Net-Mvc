@@ -27,7 +27,7 @@ namespace HaberSistemi.Admin.Controllers
         [HttpPost]
         public ActionResult Login(Kullanici kullanici)
         {
-            var kullaniciVarMi = _kullaniciRepository.GetMany(x => x.Email == kullanici.Email && x.Sifre == kullanici.Sifre && x.IsActive == true).SingleOrDefault();
+            var kullaniciVarMi = _kullaniciRepository.GetMany(x => x.Email == kullanici.Email && x.Sifre == kullanici.Sifre && x.AktifMi == true).SingleOrDefault();
             if (kullaniciVarMi != null)
             {
                 if (kullaniciVarMi.Rol.RolAdi == "Admin")
