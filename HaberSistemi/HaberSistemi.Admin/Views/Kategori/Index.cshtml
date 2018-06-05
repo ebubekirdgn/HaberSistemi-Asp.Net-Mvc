@@ -19,7 +19,6 @@
                             <th>Kategori Adı</th>
                             <th>Üst Kategori</th>
                             <th>Durum</th>
-                            <th>Ekleyen</th>
                             <th>İşlemler</th>
                         </tr>
                     </thead>
@@ -33,7 +32,7 @@
                                 <td>@item.ParentID</td>
                                 <td>
 
-                                    @if (item.IsActive == true)
+                                    @if (item.AktifMi == true)
                                     {
                                         <b class="fa fa-"> Aktif</b>
                                     }
@@ -42,7 +41,6 @@
                                         <b class="fa fa-warning">Pasif</b>
                                     }
                                 </td>
-                                <td>@item.Kullanici.AdSoyad</td>
                                 <td>
 
                                     <a href="@Url.Action("Duzenle","Kategori",new {ID = item.ID})" class="btn btn-default btn-sm">Düzenle</a>

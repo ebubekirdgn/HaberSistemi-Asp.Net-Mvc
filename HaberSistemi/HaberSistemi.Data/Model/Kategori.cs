@@ -16,6 +16,5 @@ namespace HaberSistemi.Data.Model
         public string URL { get; set; }
 
         public virtual ICollection<Haber> Haber { get; set; }
-        public virtual Kullanici Kullanici { get; set; }
     }
 }
