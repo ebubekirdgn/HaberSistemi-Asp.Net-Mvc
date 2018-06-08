@@ -29,7 +29,12 @@
                             <tr>
                                 <td><span class=""></span> @item.ID</td>
                                 <td>@item.KategoriAdi</td>
-                                <td>@item.ParentID</td>
+                                <td>
+                                    @foreach(var ustKategori in Model.Where(x => x.ID == item.ParentID))
+                                    {
+                                      <span> @ustKategori.KategoriAdi</span>
+                                    }
+                                </td>
                                 <td>
 
                                     @if (item.AktifMi == true)
