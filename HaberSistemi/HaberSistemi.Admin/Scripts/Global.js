@@ -52,7 +52,15 @@ function KategoriDuzenle() {
 
 $(document).on("click", "#KategoriDelete", function () {
     var gelenID = $(this).attr("data-id"); // data-id den yakala ID bilgisini
-    alert(gelenID);
+    var silSatir = $(this).closest("tr");
+    $.ajax({
+        url: "/Kategori/Sil/" + gelenID,
+        type: "POST",
+        datatype: 'json',
+        success: function (response) {
+            silSatir.fadeOut(300, function () {
+                silSatir.remove();
+            });
+        }
+    });
 });
-
- 

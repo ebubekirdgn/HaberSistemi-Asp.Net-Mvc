@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<HaberSistemi.Data.Model.Kategori>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container-fluid">
@@ -47,7 +49,6 @@
                                     }
                                 </td>
                                 <td>
-
                                     <a href="@Url.Action("Duzenle","Kategori",new {ID = item.ID})" class="btn btn-default btn-sm">Düzenle</a>
                                     @* @Html.ActionLink("Sil", "Sil", new { ID = item.ID }, new { onclick = "return confirm('Kaydı silmek istediğinizden emin misiniz?');" })*@
                                     <button class="btn btn-default btn-sm" id="KategoriDelete" data-id="@item.ID">Sil</button>
