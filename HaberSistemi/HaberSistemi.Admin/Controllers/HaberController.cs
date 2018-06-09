@@ -1,11 +1,7 @@
 ﻿using HaberSistemi.Admin.Class;
-using HaberSistemi.Admin.CustomFilter;
 using HaberSistemi.Core.Infrastructure;
 using HaberSistemi.Data.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace HaberSistemi.Admin.Controllers
@@ -18,8 +14,9 @@ namespace HaberSistemi.Admin.Controllers
         {
             _haberRepository = haberRepository;
         }
- 
+
         #region HaberEkle
+
         //[LoginFilter]
         public ActionResult Ekle()
         {
@@ -43,7 +40,5 @@ namespace HaberSistemi.Admin.Controllers
         }
 
         #endregion HaberEkle
-
-         
     }
 }

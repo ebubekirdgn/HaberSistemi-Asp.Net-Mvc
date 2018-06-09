@@ -23,29 +23,6 @@
         }
     });
 }
-
-function KategoriSil() {
-    var gelenID = $("#KategoriDelete").attr("data-id");
-
-    $.ajax({
-        url: '/Kategori/Sil/' + gelenID,
-        type: "POST",
-        datatype: 'json',
-        success: function (response) {
-            if (response.Success) {
-                bootbox.alert(response.Message, function () {
-                    location.reload();
-                });
-            }
-            else {
-                bootbox.alert(response.Message, function () {
-                    //TO DO :geri döndüğünde birşey yapılması isteniyorsa
-                });
-            }
-        }
-    });
-}
-
 function KategoriDuzenle() {
     Kategori = new Object();
     Kategori.KategoriAdi = $("#KategoriAdi").val(); // Kategori Adı textindeki değer alınıyor.
@@ -72,3 +49,10 @@ function KategoriDuzenle() {
         }
     });
 }
+
+$(document).on("click", "#KategoriDelete", function () {
+    var gelenID = $(this).attr("data-id"); // data-id den yakala ID bilgisini
+    alert(gelenID);
+});
+
+ 

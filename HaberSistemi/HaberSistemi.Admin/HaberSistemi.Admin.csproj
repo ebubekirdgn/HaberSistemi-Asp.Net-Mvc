@@ -453,6 +453,7 @@
     <Content Include="Scripts\js\sb-admin-datatables.min.js" />
     <Content Include="Scripts\js\sb-admin.js" />
     <Content Include="Scripts\js\sb-admin.min.js" />
+    <Content Include="Scripts\notify.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

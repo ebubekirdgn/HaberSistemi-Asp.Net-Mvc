@@ -30,9 +30,9 @@
                                 <td><span class=""></span> @item.ID</td>
                                 <td>@item.KategoriAdi</td>
                                 <td>
-                                    @foreach(var ustKategori in Model.Where(x => x.ID == item.ParentID))
+                                    @foreach (var ustKategori in Model.Where(x => x.ID == item.ParentID))
                                     {
-                                      <span> @ustKategori.KategoriAdi</span>
+                                        <span> @ustKategori.KategoriAdi</span>
                                     }
                                 </td>
                                 <td>
@@ -50,7 +50,7 @@
 
                                     <a href="@Url.Action("Duzenle","Kategori",new {ID = item.ID})" class="btn btn-default btn-sm">Düzenle</a>
                                     @* @Html.ActionLink("Sil", "Sil", new { ID = item.ID }, new { onclick = "return confirm('Kaydı silmek istediğinizden emin misiniz?');" })*@
-                                    <button class="btn btn-default btn-sm" id="KategoriDelete" onclick="KategoriSil()" data-id="@item.ID">Sil</button>
+                                    <button class="btn btn-default btn-sm" id="KategoriDelete" data-id="@item.ID">Sil</button>
                                 </td>
                             </tr>
                         }
