@@ -1,11 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using HaberSistemi.Admin.CustomFilter;
+using System.Web.Mvc;
 
 namespace HaberSistemi.Admin.Controllers
 {
     public class HomeController : Controller
     {
         // GET: Home
-        //  [LoginFilter]
+        [LoginFilter]
         public ActionResult Index()
         {
             return View();

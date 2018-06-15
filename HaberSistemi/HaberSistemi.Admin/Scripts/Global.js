@@ -58,7 +58,7 @@ $(document).on("click", "#KategoriDelete", function () {
         type: "POST",
         datatype: 'json',
         success: function (response) {
-           $.notify(response.Message, "success");
+            $.notify(response.Message, "success");
             silSatir.fadeOut(300, function () {
                 silSatir.remove();
             });

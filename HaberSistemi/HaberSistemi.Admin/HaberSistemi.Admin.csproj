@@ -463,7 +463,6 @@
     <Compile Include="Class\BootStrapper.cs" />
     <Compile Include="Class\ResultJson.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HaberController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
     <Compile Include="CustomFilter\LoginFilter.cs" />
@@ -539,7 +538,6 @@
     <Content Include="Views\Kategori\Ekle.cshtml" />
     <Content Include="Views\Kategori\Index.cshtml" />
     <Content Include="Views\Kategori\Duzenle.cshtml" />
-    <Content Include="Views\Haber\Ekle.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -549,6 +547,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="External\Haber\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
