@@ -6,7 +6,7 @@ namespace HaberSistemi.Data.Model
 {
     [Table("Haber")]
     public class Haber : BaseEntity
-    {
+    { 
         [Display(Name = "Açıklama"), MaxLength(255, ErrorMessage = "Max 255 karakter girebilirsiniz.")]
         [Required]
         public string Baslik { get; set; }
