@@ -1,6 +1,5 @@
 ﻿using HaberSistemi.Admin.CustomFilter;
 using HaberSistemi.Core.Infrastructure;
-using HaberSistemi.Core.Repostitory;
 using HaberSistemi.Data.Model;
 using System;
 using System.Collections.Generic;
@@ -26,7 +25,6 @@ namespace HaberSistemi.Admin.Controllers
             _haberRepository = haberRepository;
             _kullaniciRepository = kullaniciRepository;
             _kategoriRepository = kategoriRepository;
-
             _resimRepository = resimRepository;
         }
 
@@ -83,11 +81,13 @@ namespace HaberSistemi.Admin.Controllers
                             {
                                 ResimUrl = tamYol,
                             };
-                            resim.Haber.ID = haber.ID;
+                            resim.HaberID = haber.ID;
+                            _resimRepository.Insert(resim);
+                            _resimRepository.Save();
                         }
                     }
-                    return View();
                 }
+                return View();
             }
             return View();
         }
