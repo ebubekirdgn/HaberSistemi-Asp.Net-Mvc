@@ -26,6 +26,7 @@ namespace HaberSistemi.Admin.Controllers
             _haberRepository = haberRepository;
             _kullaniciRepository = kullaniciRepository;
             _kategoriRepository = kategoriRepository;
+
             _resimRepository = resimRepository;
         }
 
