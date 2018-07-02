@@ -28,10 +28,12 @@ namespace HaberSistemi.Admin.Controllers
             _resimRepository = resimRepository;
         }
 
+        [LoginFilter]
         // GET: Haber
         public ActionResult Index()
         {
-            return View();
+            var haberListesi = _haberRepository.GetAll();
+            return View(haberListesi);
         }
 
         [HttpGet]
@@ -87,7 +89,7 @@ namespace HaberSistemi.Admin.Controllers
                         }
                     }
                 }
-                return View();
+                return RedirectToAction("Index", "Haber");
             }
             return View();
         }
