@@ -23,6 +23,8 @@
         }
     });
 }
+
+ 
 function KategoriDuzenle() {
     Kategori = new Object();
     Kategori.KategoriAdi = $("#KategoriAdi").val(); // Kategori Adı textindeki değer alınıyor.
