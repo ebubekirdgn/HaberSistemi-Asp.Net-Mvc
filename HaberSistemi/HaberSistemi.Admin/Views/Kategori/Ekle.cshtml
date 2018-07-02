@@ -6,6 +6,7 @@
 <div class="container-fluid">
     <form>
         <div class="form-row">
+            @Html.HiddenFor(x => x.ID)
             <div class="form-group col-md-8">
                 <label for="inputState">Üst Kategoriler</label>
                 @Html.DropDownListFor(model => model.KategoriAdi, new SelectList(ViewBag.Kategori, "ID", "KategoriAdi"), ("Seçiniz"), new { @class = "form-control", id = "ParentID" })

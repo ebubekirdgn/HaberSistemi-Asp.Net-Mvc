@@ -13,7 +13,7 @@ namespace HaberSistemi.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201806051439394_Olustur"; }
+            get { return "201807020659218_Olustur"; }
         }
         
         string IMigrationMetadata.Source
