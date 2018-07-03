@@ -3,6 +3,7 @@ using HaberSistemi.Core.Infrastructure;
 using HaberSistemi.Data.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -96,6 +97,67 @@ namespace HaberSistemi.Admin.Controllers
         }
 
         #endregion Haber Ekle
+
+        #region Haber Sil
+
+        public ActionResult Sil(int id)
+        {
+            Haber dbHaber = _haberRepository.GetById(id);
+            var dbDetayResim = _resimRepository.GetMany(x => x.HaberID == id);
+
+            if (dbHaber == null)
+            {
+                throw new Exception("Haber Bulunamadı");
+            }
+
+            string file_name = dbHaber.Resim;
+            string path = Server.MapPath(file_name);
+            FileInfo file = new FileInfo(path);
+            if (file.Exists) // Dosyanın varlığı kontrol ediliyor. Fiziksel olarak var ise siliniyor.
+            {
+                file.Delete();
+            }
+            if (dbDetayResim != null)
+            {
+                foreach (var item in dbDetayResim)
+                {
+                    string detayPath = Server.MapPath(item.ResimUrl);
+                    FileInfo files = new FileInfo(detayPath);
+                    if (files.Exists)
+                    {
+                        files.Delete();
+                    }
+                }
+            }
+            _haberRepository.Delete(id);
+            _haberRepository.Save();
+            TempData["Bilgi"] = "Haber Başarılı Bir Şekilde Silindi";
+            return RedirectToAction("Index", "Haber");
+        }
+
+        #endregion Haber Sil
+
+        public ActionResult Onay(int id)
+        {
+            Haber gelenHaber = _haberRepository.GetById(id); // id bilgisine göre haber çekildi.
+
+            if (gelenHaber.AktifMi == true)
+            {
+                gelenHaber.AktifMi = false;
+                _haberRepository.Save();
+                TempData["Bilgi"] = "Haber Pasif Durumda";
+                return RedirectToAction("Index", "Haber");
+            }
+            else if (gelenHaber.AktifMi == false)
+            {
+                gelenHaber.AktifMi = true;
+                _haberRepository.Save();
+                TempData["Bilgi"] = "Haber Aktif Durumda";
+                return RedirectToAction("Index", "Haber");
+            }
+
+            return View();
+        }
 
         #region Set Kategori listesi
 
