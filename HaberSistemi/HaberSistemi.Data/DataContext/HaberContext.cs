@@ -1,5 +1,9 @@
 ﻿using HaberSistemi.Data.Model;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+using System.Web;
 
 namespace HaberSistemi.Data.DataContext
 {
@@ -14,5 +18,9 @@ namespace HaberSistemi.Data.DataContext
         public DbSet<Resim> Resim { get; set; }
 
         public DbSet<Kategori> Kategori { get; set; }
+
+        public DbSet<Etiket> Etiket { get; set; }
+
+        public DbSet<Slider> Slider { get; set; }
     }
 }

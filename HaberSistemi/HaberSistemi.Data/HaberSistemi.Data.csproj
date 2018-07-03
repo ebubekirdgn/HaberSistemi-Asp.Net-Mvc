@@ -50,11 +50,14 @@
     <Compile Include="DataContext\HaberContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\BaseEntity.cs" />
+    <Compile Include="Model\Etiket.cs" />
     <Compile Include="Model\Haber.cs" />
+    <Compile Include="Model\HaberEtiketModel.cs" />
     <Compile Include="Model\Kategori.cs" />
     <Compile Include="Model\Kullanici.cs" />
     <Compile Include="Model\Resim.cs" />
     <Compile Include="Model\Rol.cs" />
+    <Compile Include="Model\Slider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

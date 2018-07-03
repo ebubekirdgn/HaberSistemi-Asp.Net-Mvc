@@ -137,6 +137,8 @@ namespace HaberSistemi.Admin.Controllers
 
         #endregion Haber Sil
 
+        #region Onay
+
         public ActionResult Onay(int id)
         {
             Haber gelenHaber = _haberRepository.GetById(id); // id bilgisine göre haber çekildi.
@@ -159,6 +161,8 @@ namespace HaberSistemi.Admin.Controllers
             return View();
         }
 
+        #endregion Onay
+
         #region Set Kategori listesi
 
         public void SetKategoriListele(object kategori = null)
@@ -168,5 +172,49 @@ namespace HaberSistemi.Admin.Controllers
         }
 
         #endregion Set Kategori listesi
+
+        #region Düzenle
+
+        [LoginFilter]
+        [HttpGet]
+        public ActionResult Duzenle(int id)
+        {
+            Haber gelenHaber = _haberRepository.GetById(id);
+            if (gelenHaber == null)
+            {
+                throw new Exception("Haber Bulunamadı");
+            }
+            else
+            {
+                SetKategoriListele();
+                return View(gelenHaber);
+            }
+        }
+
+        [LoginFilter]
+        [HttpPost]
+        public ActionResult Duzenle(Haber haber, int KategoriID)
+        {
+            Haber gelenHaber = _haberRepository.GetById(haber.ID);
+
+            gelenHaber.Aciklama = haber.Aciklama;
+            gelenHaber.AktifMi = haber.AktifMi;
+            gelenHaber.Baslik = haber.Baslik;
+            gelenHaber.KisaAciklama = haber.KisaAciklama;
+            gelenHaber.Aciklama = haber.Aciklama;
+            gelenHaber.KategoriID = KategoriID;
+
+            if (gelenHaber == null)
+            {
+                throw new Exception("Haber Bulunamadı");
+            }
+            else
+            {
+                SetKategoriListele();
+                return View(gelenHaber);
+            }
+        }
+
+        #endregion Düzenle
     }
 }
