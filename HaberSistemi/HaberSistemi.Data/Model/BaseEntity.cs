@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HaberSistemi.Data.Model
 {
@@ -9,6 +13,7 @@ namespace HaberSistemi.Data.Model
         public int ID { get; set; }
 
         private DateTime Tarih = DateTime.Now;
+
         private bool Aktif = true;
 
         public DateTime EklenmeTarihi

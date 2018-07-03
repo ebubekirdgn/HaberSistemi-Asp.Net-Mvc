@@ -7,18 +7,22 @@ namespace HaberSistemi.Admin.Controllers
 {
     public class AccountController : Controller
     {
-        #region Kullanici
+        #region Kullanıcı
 
         private readonly IKullaniciRepository _kullaniciRepository;
+        private readonly IRolRepository _rolRepository;
 
-        public AccountController(IKullaniciRepository kullaniciRepository)
+        public AccountController(IKullaniciRepository kullaniciRepository, IRolRepository rolRepository)
         {
             _kullaniciRepository = kullaniciRepository;
+            _rolRepository = rolRepository;
         }
 
-        #endregion Kullanici
+        #endregion Kullanıcı
 
-        // GET: Account
+        #region Giriş
+
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -27,20 +31,22 @@ namespace HaberSistemi.Admin.Controllers
         [HttpPost]
         public ActionResult Login(Kullanici kullanici)
         {
-            var kullaniciVarMi = _kullaniciRepository.GetMany(x => x.Email == kullanici.Email && x.Sifre == kullanici.Sifre && x.AktifMi == true).SingleOrDefault();
-            if (kullaniciVarMi != null)
+            var KullaniciVarmi = _kullaniciRepository.GetMany(x => x.Email == kullanici.Email && x.Sifre == kullanici.Sifre && x.AktifMi == true).SingleOrDefault();
+            if (KullaniciVarmi != null)
             {
-                if (kullaniciVarMi.Rol.RolAdi == "Admin")
+                if (KullaniciVarmi.Rol.RolAdi == "Admin")
                 {
-                    Session["KullaniciEmail"] = kullaniciVarMi.Email; // Sessiona kullanıcının email bilgisi yuklendi.
+                    Session["KullaniciEmail"] = KullaniciVarmi.ID;
+                    Session["KullaniciAdi"] = KullaniciVarmi.AdSoyad;
                     return RedirectToAction("Index", "Home");
                 }
                 ViewBag.Mesaj = "Yetkisiz Kullanıcı";
                 return View();
             }
-
-            ViewBag.Mesaj = "Kullanıcı Bulunamadı.";
+            ViewBag.Mesaj = "Kullanıcı Bulunamadı";
             return View();
         }
+
+        #endregion Giriş
     }
 }

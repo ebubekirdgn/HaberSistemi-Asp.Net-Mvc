@@ -1,9 +1,14 @@
-﻿using HaberSistemi.Data.Infrastructure;
-using HaberSistemi.Data.Model;
+﻿using HaberSistemi.Data.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HaberSistemi.Core.Infrastructure
 {
-    public interface IKullaniciRepository : IRepostitory<Kullanici>
+    public interface IKullaniciRepository : IRepository<Kullanici>
     {
+        Kullanici KullaniciBul(string Email);
     }
 }

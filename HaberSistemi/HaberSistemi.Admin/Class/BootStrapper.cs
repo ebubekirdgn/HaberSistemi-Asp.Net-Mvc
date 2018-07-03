@@ -1,15 +1,14 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using HaberSistemi.Core.Infrastructure;
-using HaberSistemi.Core.Repostitory;
+using HaberSistemi.Core.Repository;
 using System.Web.Mvc;
 
 namespace HaberSistemi.Admin.Class
 {
     public class BootStrapper
     {
-        //boot aşamasında çalışacak
-
+        // Boot Aşamasında çalışacak
         public static void RunConfig()
         {
             BuildAutoFac();
@@ -18,13 +17,12 @@ namespace HaberSistemi.Admin.Class
         private static void BuildAutoFac()
         {
             var builder = new ContainerBuilder();
-
-            builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<HaberRepository>().As<IHaberRepository>();
+            builder.RegisterType<ResimRepository>().As<IResimRepository>();
             builder.RegisterType<KullaniciRepository>().As<IKullaniciRepository>();
             builder.RegisterType<RolRepository>().As<IRolRepository>();
-            builder.RegisterType<ResimRepository>().As<IResimRepository>();
             builder.RegisterType<KategoriRepository>().As<IKategoriRepository>();
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             var container = builder.Build();
 

@@ -9,6 +9,9 @@
             <i class="fa fa-table"></i> Haber Listesi
         </div>
         <div class="card-body">
+            @if (TempData["Bilgi"] != null)
+            {@TempData["Bilgi"];
+        }
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -27,8 +30,8 @@
                         {
                             <tr>
                                 <td>@item.ID</td>
-                                <td>@item.Baslik</td>
                                 <td><img src="@item.Resim" alt="@item.Baslik" width="100" /></td>
+                                <td>@item.Baslik</td>
                                 <td>@item.EklenmeTarihi.ToString("MM.dd.yyyy")</td>
 
                                 <td>@item.Kategori.KategoriAdi</td>
@@ -43,8 +46,8 @@
                                     }
                                 </td>
                                 <td>
-                                    <button class="btn btn-default btn-sm" id="KategoriDelete" data-id="@item.ID">Sil</button>
-                                    <button class="btn btn-default btn-sm" id="KategoriDelete" data-id="@item.ID">Sil</button>
+                                    <button class="btn btn-success btn-sm" id="KategoriDelete" data-id="@item.ID">Detay</button>
+                                    <button class="btn btn-danger btn-sm" id="KategoriDelete" data-id="@item.ID">Sil</button>
                                 </td>
                             </tr>
                         }
@@ -52,6 +55,5 @@
                 </table>
             </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
     </div>
 </div>

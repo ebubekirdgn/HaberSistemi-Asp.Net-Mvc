@@ -29,12 +29,13 @@ namespace HaberSistemi.Admin.Controllers
         }
 
         [LoginFilter]
-        // GET: Haber
         public ActionResult Index()
         {
             var haberListesi = _haberRepository.GetAll();
             return View(haberListesi);
         }
+
+        #region Haber Ekle
 
         [HttpGet]
         [LoginFilter]
@@ -50,38 +51,37 @@ namespace HaberSistemi.Admin.Controllers
         {
             var SessionControl = HttpContext.Session["KullaniciEmail"];
 
-            if (ModelState.IsValid)
+            if (haber != null)
             {
                 Kullanici kullanici = _kullaniciRepository.GetById(Convert.ToInt32(SessionControl));
                 haber.KullaniciID = kullanici.ID;
                 haber.KategoriID = KategoriID;
-
                 if (VitrinResmi != null)
                 {
-                    string dosyaAdi = Guid.NewGuid().ToString().Replace("-", "");
-                    string uzanti = System.IO.Path.GetExtension(Request.Files[0].FileName); // 0 olması tek resim yükleyecegimiz anlamına geliyor.
-                    string tamYol = "/External/Haber/" + dosyaAdi + uzanti;
-                    Request.Files[0].SaveAs(Server.MapPath(tamYol));
-                    haber.Resim = tamYol;
+                    string DosyaAdi = Guid.NewGuid().ToString().Replace("-", "");
+                    string Uzanti = System.IO.Path.GetExtension(Request.Files[0].FileName);
+                    string TamYol = "/External/Haber/" + DosyaAdi + Uzanti;
+                    Request.Files[0].SaveAs(Server.MapPath(TamYol));
+                    haber.Resim = TamYol;
                 }
                 _haberRepository.Insert(haber);
                 _haberRepository.Save();
 
-                string cokluResim = System.IO.Path.GetExtension(Request.Files[1].FileName);  // 1 olması ise coklu resim yükleyecegimiz anlamına geliyor.
-
-                if (DetayResim != null)
+                string cokluResims = System.IO.Path.GetExtension(Request.Files[1].FileName);
+                if (cokluResims != "")
                 {
                     foreach (var file in DetayResim)
                     {
                         if (file.ContentLength > 0)
                         {
-                            string dosyaAdi = Guid.NewGuid().ToString().Replace("-", "");
-                            string uzanti = System.IO.Path.GetExtension(Request.Files[1].FileName);
-                            string tamYol = "/External/Haber/" + dosyaAdi + uzanti;
-                            file.SaveAs(Server.MapPath(tamYol));
+                            string DosyaAdi = Guid.NewGuid().ToString().Replace("-", "");
+                            string Uzanti = System.IO.Path.GetExtension(Request.Files[1].FileName);
+                            string TamYol = "/External/Haber/" + DosyaAdi + Uzanti;
+                            file.SaveAs(Server.MapPath(TamYol));
+
                             var resim = new Resim
                             {
-                                ResimUrl = tamYol,
+                                ResimUrl = TamYol
                             };
                             resim.HaberID = haber.ID;
                             _resimRepository.Insert(resim);
@@ -89,19 +89,22 @@ namespace HaberSistemi.Admin.Controllers
                         }
                     }
                 }
+                TempData["Bilgi"] = "Haber Ekleme İşleminiz Başarılı";
                 return RedirectToAction("Index", "Haber");
             }
             return View();
         }
 
-        #region KategoriListesi
+        #endregion Haber Ekle
+
+        #region Set Kategori listesi
 
         public void SetKategoriListele(object kategori = null)
         {
-            var kategoriList = _kategoriRepository.GetMany(x => x.ParentID == 0).ToList();
-            ViewBag.Kategori = kategoriList;
+            var KategoriList = _kategoriRepository.GetMany(x => x.ParentID == 0).ToList();
+            ViewBag.Kategori = KategoriList;
         }
 
-        #endregion KategoriListesi
+        #endregion Set Kategori listesi
     }
 }

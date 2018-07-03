@@ -2,27 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace HaberSistemi.Data.Infrastructure
+namespace HaberSistemi.Core.Infrastructure
 {
-    public interface IRepostitory<T> where T : class
+    public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll(); // Tüm datamızı getirecek olan method
+        // Tüm datamızı çekecek
+        IEnumerable<T> GetAll();
 
-        T GetById(int id); // Tek bir data getirecek olan method
+        // tek bir nesne dönecek
+        T GetById(int id);
 
         T Get(Expression<Func<T, bool>> expression);
 
-        IQueryable<T> GetMany(Expression<Func<T, bool>> expression); //Birden fazla değer dönecek ama expressiona göre dönecek.
+        IQueryable<T> GetMany(Expression<Func<T, bool>> expression);
 
-        void Insert(T obj); // Ekleme işlemi yapacak olan method
+        void Insert(T obj);
 
-        void Update(T obj); //Güncelleme yapacak olan method
+        void Update(T obj);
 
-        void Delete(int id); // Silme yapacak olan method
+        void Delete(int id);
 
-        int Count();//Kayıt sayımızı verecek olan method
+        int Count();
 
-        void Save();// Kaydetme methodumuz
+        void Save();
+
     }
 }
