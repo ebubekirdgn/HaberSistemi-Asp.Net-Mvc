@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HaberSistemi.Data.Model
 {
     [Table("Kullanici")]
     public class Kullanici : BaseEntity
     {
-      
-
         [MaxLength(150, ErrorMessage = "Lütfen 50 karakterden fazla değer girmeyiniz !")]
         [Display(Name = "Ad Soyad")]
         public string AdSoyad { get; set; }
@@ -28,11 +21,8 @@ namespace HaberSistemi.Data.Model
         [MaxLength(16, ErrorMessage = "Lütfen 16 karakterden fazla değer girmeyiniz !")]
         public string Sifre { get; set; }
 
-
         public int RolID { get; set; }
 
         public virtual Rol Rol { get; set; }
-
-
     }
 }

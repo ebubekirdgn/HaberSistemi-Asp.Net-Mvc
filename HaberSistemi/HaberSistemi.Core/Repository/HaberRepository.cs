@@ -2,11 +2,8 @@
 using HaberSistemi.Data.DataContext;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity.Migrations; // AddOrUpdate için gerekli
-using HaberSistemi.Data.Model;
+using System.Linq;
 
 namespace HaberSistemi.Core.Repository
 {
@@ -62,7 +59,5 @@ namespace HaberSistemi.Core.Repository
         {
             _context.SaveChanges();
         }
-
-    
     }
 }

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HaberSistemi.Core.Infrastructure
 {
@@ -28,6 +26,5 @@ namespace HaberSistemi.Core.Infrastructure
         int Count();
 
         void Save();
-
     }
 }
