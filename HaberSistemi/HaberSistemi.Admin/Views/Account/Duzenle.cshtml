@@ -1,0 +1,84 @@
+﻿@model HaberSistemi.Data.Model.Kullanici
+@{
+    ViewBag.Title = "Kullanıcı Düzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <!-- Basic form -->
+    @using (Html.BeginForm("Duzenle", "Account", FormMethod.Post, new { enctype = "multipart/form-data", id = "KullaniciForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <header class="panel-heading">@ViewBag.Title</header>
+                    <div class="panel-body">
+                        @Html.HiddenFor(x => x.ID)
+                        <form role="form">
+
+                            <div class="form-group">
+                                <label for="Kategori">Kategori</label>
+                                @Html.DropDownListFor(model => model.RolID, new SelectList(ViewBag.Rol, "ID", "RolAdi"), ("Seçiniz"), new { @class = "form-control", id = "RolID" })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Ad Soyad</label>
+                                @Html.TextBoxFor(x => x.AdSoyad, new { @class = "form-control", id = "AdSoyad", placeholder = "Ad Soyad" })
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", id = "Email", placeholder = "Email", @type = "email" })
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                @Html.TextBoxFor(x => x.Sifre, new { @class = "form-control", id = "Sifre", placeholder = "Şifre", @type = "password" })
+                            </div>
+
+
+                            <div class="checkbox">
+                                <label>
+
+                                    @Html.CheckBoxFor(x => x.AktifMi, new { @checked = "checked", id = "haberAktif" }) Aktif Mi ?
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-default" id="KullaniciEkle">Kaydet</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- /Basic form -->
+
+</div>
+<script>
+    $(document).ready(function () {
+        $(document).on("click", "#KullaniciEkle", function () {
+            $('#KullaniciForm').ajaxForm({
+                success: function (response) {
+                    if (response.Success) {
+                        bootbox.alert(response.Message, function () {
+                            location.reload();
+                        });
+
+                    }
+                    else {
+                        bootbox.alert(response.Message, function () {
+                            // geridöndüğünde bir şey yapılması isteniyorsa buraya yazılır
+                        });
+                    }
+                }
+            })
+        })
+    })
+</script>

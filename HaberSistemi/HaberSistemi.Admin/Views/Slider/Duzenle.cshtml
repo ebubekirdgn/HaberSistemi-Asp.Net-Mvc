@@ -1,0 +1,94 @@
+﻿@model HaberSistemi.Data.Model.Slider
+@{
+    ViewBag.Title = "Slider Düzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/ckeditor/ckeditor.js"></script>
+
+<div class="container-fluid">
+    <!-- Basic form -->
+    @using (Html.BeginForm("Duzenle", "Slider", FormMethod.Post, new { enctype = "multipart/form-data", id = "SliderFormDuzenle" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <header class="panel-heading">@ViewBag.Title</header>
+                    <div class="panel-body">
+
+                        <form role="form">
+
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Başlık</label>
+                                @Html.TextBoxFor(x => x.Baslik, new { @class = "form-control", id = "Baslik", placeholder = "Başlık" })
+                                @Html.ValidationMessageFor(x => x.Baslik)
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">URL</label>
+                                @Html.TextBoxFor(x => x.URL, new { @class = "form-control", id = "URL", placeholder = "URL" })
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Açıklama</label>
+                                @*@Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control", id = "Aciklama", placeholder = "Açıklama" })*@
+                                @Html.TextArea("Aciklama")
+                                <script type="text/javascript">
+                                    var editor = CKEDITOR.instances['Aciklama'];
+                                    if (editor) { editor.destroy(true); }
+                                    CKEDITOR.replace('Aciklama', {
+                                        enterMode: CKEDITOR.ENTER_BR,
+                                    });
+                                </script>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Resim</label>
+                                <input type="file" name="ResimURL" accept="image/*" class="form-control" />
+                                @Html.ValidationMessageFor(x => x.ResimURL)
+                            </div>
+
+
+
+                            <div class="checkbox">
+                                <label>
+
+                                    @Html.CheckBoxFor(x => x.AktifMi, new { @checked = "checked", id = "SliderAktif" }) Aktif Mi ?
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-default" id="SliderDuzenle">Kaydet</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- /Basic form -->
+
+</div>
+<script>
+    $(document).ready(function () {
+        $(document).on("click", "#SliderDuzenle", function () {
+            $('#SliderFormDuzenle').ajaxForm({
+                success: function (response) {
+                    if (response.Success) {
+                        bootbox.alert(response.Message, function () {
+                            location.reload();
+                        });
+
+                    }
+                    else {
+                        bootbox.alert(response.Message, function () {
+                            // geridöndüğünde bir şey yapılması isteniyorsa buraya yazılır
+                        });
+                    }
+                }
+            })
+        })
+    })
+</script>

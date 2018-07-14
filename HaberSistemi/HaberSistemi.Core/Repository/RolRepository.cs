@@ -2,13 +2,16 @@
 using HaberSistemi.Data.DataContext;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity.Migrations;
 
 namespace HaberSistemi.Core.Repository
 {
-    public class RolRepository : IRolRepository
+   public class RolRepository : IRolRepository
     {
+
         private readonly HaberContext _context = new HaberContext();
 
         public IEnumerable<Data.Model.Rol> GetAll()

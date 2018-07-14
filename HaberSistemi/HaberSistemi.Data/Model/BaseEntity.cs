@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HaberSistemi.Data.Model
 {
@@ -12,28 +16,21 @@ namespace HaberSistemi.Data.Model
 
         private bool Aktif = true;
 
-        public DateTime EklenmeTarihi
-        {
-            get
-            {
+        public DateTime EklenmeTarihi { get {
                 return Tarih;
-            }
-            set
-            {
+            } set {
                 Tarih = value;
-            }
-        }
+            } }
 
-        public bool AktifMi
-        {
-            get
+        public bool AktifMi { get
             {
                 return Aktif;
+
             }
             set
             {
                 Aktif = value;
-            }
+                    }
         }
     }
 }

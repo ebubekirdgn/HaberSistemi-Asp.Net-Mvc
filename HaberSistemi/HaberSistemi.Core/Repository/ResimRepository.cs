@@ -2,12 +2,14 @@
 using HaberSistemi.Data.DataContext;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations; // AddOrUpdate için gerekli
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity.Migrations; // AddOrUpdate için gerekli
 
 namespace HaberSistemi.Core.Repository
 {
-    public class ResimRepository : IResimRepository
+   public class ResimRepository : IResimRepository
     {
         private readonly HaberContext _context = new HaberContext();
 

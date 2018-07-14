@@ -3,10 +3,12 @@ using HaberSistemi.Core.Infrastructure;
 using HaberSistemi.Data.Model;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using System.IO;
+using System.Text;
 
 namespace HaberSistemi.Admin.Controllers
 {
@@ -18,22 +20,24 @@ namespace HaberSistemi.Admin.Controllers
         private readonly IKullaniciRepository _kullaniciRepository;
         private readonly IKategoriRepository _kategoriRepository;
         private readonly IResimRepository _resimRepository;
+        private readonly IEtiketRepository _etiketRepository;
 
         #endregion Veritabanı
 
-        public HaberController(IHaberRepository haberRepository, IKullaniciRepository kullaniciRepository, IKategoriRepository kategoriRepository, IResimRepository resimRepository)
+        public HaberController(IHaberRepository haberRepository, IKullaniciRepository kullaniciRepository, IKategoriRepository kategoriRepository, IResimRepository resimRepository, IEtiketRepository etiketRepository)
         {
             _haberRepository = haberRepository;
             _kullaniciRepository = kullaniciRepository;
             _kategoriRepository = kategoriRepository;
             _resimRepository = resimRepository;
+            _etiketRepository = etiketRepository;
         }
 
-        [LoginFilter]
-        public ActionResult Index()
+        //[LoginFilter]
+        public ActionResult Index(int Sayfa = 1)
         {
-            var haberListesi = _haberRepository.GetAll();
-            return View(haberListesi);
+            var HaberListesi = _haberRepository.GetAll();
+            return View(HaberListesi.OrderByDescending(x => x.ID).ToPagedList(Sayfa, 20));
         }
 
         #region Haber Ekle
@@ -48,7 +52,7 @@ namespace HaberSistemi.Admin.Controllers
 
         [HttpPost]
         [LoginFilter]
-        public ActionResult Ekle(Haber haber, int KategoriID, HttpPostedFileBase VitrinResmi, IEnumerable<HttpPostedFileBase> DetayResim)
+        public ActionResult Ekle(Haber haber, int KategoriID, HttpPostedFileBase VitrinResmi, IEnumerable<HttpPostedFileBase> DetayResim, string Etiket)
         {
             var SessionControl = HttpContext.Session["KullaniciEmail"];
 
@@ -67,6 +71,8 @@ namespace HaberSistemi.Admin.Controllers
                 }
                 _haberRepository.Insert(haber);
                 _haberRepository.Save();
+
+                _etiketRepository.EtiketEkle(haber.ID, Etiket);
 
                 string cokluResims = System.IO.Path.GetExtension(Request.Files[1].FileName);
                 if (cokluResims != "")
@@ -104,7 +110,6 @@ namespace HaberSistemi.Admin.Controllers
         {
             Haber dbHaber = _haberRepository.GetById(id);
             var dbDetayResim = _resimRepository.GetMany(x => x.HaberID == id);
-
             if (dbHaber == null)
             {
                 throw new Exception("Haber Bulunamadı");
@@ -137,32 +142,6 @@ namespace HaberSistemi.Admin.Controllers
 
         #endregion Haber Sil
 
-        #region Onay
-
-        public ActionResult Onay(int id)
-        {
-            Haber gelenHaber = _haberRepository.GetById(id); // id bilgisine göre haber çekildi.
-
-            if (gelenHaber.AktifMi == true)
-            {
-                gelenHaber.AktifMi = false;
-                _haberRepository.Save();
-                TempData["Bilgi"] = "Haber Pasif Durumda";
-                return RedirectToAction("Index", "Haber");
-            }
-            else if (gelenHaber.AktifMi == false)
-            {
-                gelenHaber.AktifMi = true;
-                _haberRepository.Save();
-                TempData["Bilgi"] = "Haber Aktif Durumda";
-                return RedirectToAction("Index", "Haber");
-            }
-
-            return View();
-        }
-
-        #endregion Onay
-
         #region Set Kategori listesi
 
         public void SetKategoriListele(object kategori = null)
@@ -173,13 +152,59 @@ namespace HaberSistemi.Admin.Controllers
 
         #endregion Set Kategori listesi
 
-        #region Düzenle
+        #region Aktif / Pasif Yapar
 
-        [LoginFilter]
+        public ActionResult Onay(int id)
+        {
+            Haber gelenHaber = _haberRepository.GetById(id);
+            if (gelenHaber.AktifMi == true)
+            {
+                gelenHaber.AktifMi = false;
+                _haberRepository.Save();
+                TempData["Bilgi"] = "İşleminiz Başarılı";
+                return RedirectToAction("Index", "Haber");
+            }
+            else if (gelenHaber.AktifMi == false)
+            {
+                gelenHaber.AktifMi = true;
+                _haberRepository.Save();
+                TempData["Bilgi"] = "İşleminiz Başarılı";
+                return RedirectToAction("Index", "Haber");
+            }
+
+            return View();
+        }
+
+        #endregion Aktif / Pasif Yapar
+
+        #region Haber Düzenle
+
         [HttpGet]
+        [LoginFilter]
         public ActionResult Duzenle(int id)
         {
             Haber gelenHaber = _haberRepository.GetById(id);
+
+            #region Etiket
+
+            var gelenEtiket = gelenHaber.Etiket.Select(x => x.EtiketAdi).ToArray();
+            HaberEtiketModel model = new HaberEtiketModel
+            {
+                Haber = gelenHaber,
+                Etiketler = _etiketRepository.GetAll(),
+                GelenEtikler = gelenEtiket
+            };
+            StringBuilder birlestir = new StringBuilder();
+            foreach (var etiket in model.GelenEtikler)
+            {
+                birlestir.Append(etiket.ToString());
+                birlestir.Append(",");
+            }
+            model.EtiketAd = birlestir.ToString();
+            #endregion Etiket
+
+
+
             if (gelenHaber == null)
             {
                 throw new Exception("Haber Bulunamadı");
@@ -187,34 +212,88 @@ namespace HaberSistemi.Admin.Controllers
             else
             {
                 SetKategoriListele();
-                return View(gelenHaber);
+                return View(model);
             }
         }
 
-        [LoginFilter]
         [HttpPost]
-        public ActionResult Duzenle(Haber haber, int KategoriID)
+        [LoginFilter]
+        public ActionResult Duzenle(Haber haber, HttpPostedFileBase VitrinResmi, IEnumerable<HttpPostedFileBase> DetayResim, string EtiketAd)
         {
             Haber gelenHaber = _haberRepository.GetById(haber.ID);
-
             gelenHaber.Aciklama = haber.Aciklama;
             gelenHaber.AktifMi = haber.AktifMi;
             gelenHaber.Baslik = haber.Baslik;
             gelenHaber.KisaAciklama = haber.KisaAciklama;
-            gelenHaber.Aciklama = haber.Aciklama;
-            gelenHaber.KategoriID = KategoriID;
+            gelenHaber.KategoriID = haber.KategoriID;
 
-            if (gelenHaber == null)
+            if (VitrinResmi != null)
             {
-                throw new Exception("Haber Bulunamadı");
+                string dosyaAdi = gelenHaber.Resim;
+                string dosyaYolu = Server.MapPath(dosyaAdi);
+                FileInfo dosya = new FileInfo(dosyaYolu);
+                if (dosya.Exists)
+                {
+                    dosya.Delete();
+                }
+
+                string file_name = Guid.NewGuid().ToString().Replace("-", "");
+                string uzanti = System.IO.Path.GetExtension(Request.Files[0].FileName);
+                string TamYol = "/External/Haber/" + file_name + uzanti;
+                Request.Files[0].SaveAs(Server.MapPath(TamYol));
+                gelenHaber.Resim = TamYol;
             }
-            else
+
+            string CokluResim = System.IO.Path.GetExtension(Request.Files[1].FileName);
+            if (CokluResim != "")
             {
-                SetKategoriListele();
-                return View(gelenHaber);
+                foreach (var dosya in DetayResim)
+                {
+                    string file_name = Guid.NewGuid().ToString().Replace("-", "");
+                    string uzanti = System.IO.Path.GetExtension(Request.Files[1].FileName);
+                    string TamYol = "/External/Haber/" + file_name + uzanti;
+                    dosya.SaveAs(Server.MapPath(TamYol));
+                    //Request.Files[1].SaveAs(Server.MapPath(TamYol));
+                    var img = new Resim
+                    {
+                        ResimUrl = TamYol
+                    };
+                    img.HaberID = gelenHaber.ID;
+                    img.EklenmeTarihi = DateTime.Now;
+                    _resimRepository.Insert(img);
+                    _resimRepository.Save();
+                }
             }
+            _etiketRepository.EtiketEkle(haber.ID, EtiketAd);
+            _haberRepository.Save();
+            TempData["Bilgi"] = "Güncelleme İşleminiz Başarılı";
+            return RedirectToAction("Index", "Haber");
         }
 
-        #endregion Düzenle
+        #endregion Haber Düzenle
+
+        #region Resim Sil
+
+        public ActionResult ResimSil(int id)
+        {
+            Resim dbResim = _resimRepository.GetById(id);
+            if (dbResim == null)
+            {
+                throw new Exception("Resim Bulunamadı");
+            }
+            string file_name = dbResim.ResimUrl;
+            string path = Server.MapPath(file_name);
+            FileInfo file = new FileInfo(path);
+            if (file.Exists)
+            {
+                file.Delete();
+            }
+            _resimRepository.Delete(id);
+            _resimRepository.Save();
+            TempData["Bilgi"] = "Resim Silme İşlemi Başarılı";
+            return RedirectToAction("Index", "Haber");
+        }
+
+        #endregion Resim Sil
     }
 }

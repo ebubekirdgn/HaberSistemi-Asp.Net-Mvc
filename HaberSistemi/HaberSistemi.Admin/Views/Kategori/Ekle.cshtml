@@ -3,32 +3,45 @@
     ViewBag.Title = "Kategori Ekle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/Scripts/Global.js"></script>
-<div class="container-fluid">
-    <form>
-        <div class="form-row">
-            @Html.HiddenFor(x => x.ID)
-            <div class="form-group col-md-8">
-                <label for="inputState">Üst Kategoriler</label>
-                @Html.DropDownListFor(model => model.KategoriAdi, new SelectList(ViewBag.Kategori, "ID", "KategoriAdi"), ("Seçiniz"), new { @class = "form-control", id = "ParentID" })
-            </div>
-            <div class="form-group col-md-8">
-                <label for="inputEmail4">Kategori Adı</label>
-                <input type="email" class="form-control" id="KategoriAdi" placeholder="Kategori Adı">
-            </div>
-            <div class="form-group col-md-8">
-                <label for="inputPassword4">URL</label>
-                <input type="text" class="form-control" id="KategoriUrl" placeholder="URL">
-            </div>
-            <div class="form-group col-md-8">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="KategoriAktif" checked>
-                    <label class="form-check-label" for="gridCheck">
-                        Aktif Mi?
-                    </label>
+
+
+    <div class="container-fluid">
+        <!-- Basic form -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <header class="panel-heading">@ViewBag.Title</header>
+                    <div class="panel-body">
+                        @Html.HiddenFor(x => x.ID)
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Üst Kategori</label>
+                                @Html.DropDownListFor(model => model.KategoriAdi, new SelectList(ViewBag.Kategori, "ID", "KategoriAdi"), ("Seçiniz"), new {@class="form-control" , id="ParentID" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Kategori Adı</label>
+                                @Html.TextBoxFor(x => x.KategoriAdi , new { @class="form-control" , id= "kategoriAdi" , placeholder="Kategori Adı" })
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Kategori Url</label>
+                              
+                                @Html.TextBoxFor(x => x.URL, new { @class = "form-control", id = "kategoriUrl", placeholder = "URL" })
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                            
+                                    @Html.CheckBoxFor(x => x.AktifMi , new { @checked="checked" , id= "kategoriAktif" }) Aktif Mi ?
+                                </label>
+                            </div>
+                            <a href="#" class="btn btn-default" onclick="KategoriEkle();">Kaydet</a>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <a href="#" class="btn btn-primary" onclick="KategoriEkle();">Kaydet</a>
-    </form>
-</div>
+        <!-- /Basic form -->
+
+    </div>
+

@@ -193,8 +193,8 @@
 		arrowShow: true,
 		arrowSize: 5,
 		breakNewLines: true,
-		elementPosition: "bottom",
-		globalPosition: "top right",
+		elementPosition: "top right",
+		globalPosition: "bottom right",
 		style: "bootstrap",
 		className: "error",
 		showAnimation: "slideDown",
@@ -346,7 +346,7 @@
 		var align = positions[pAlign];
 		var key = pMain + "|" + pAlign;
 		var anchor = globalAnchors[key];
-		if (!anchor || !document.body.contains(anchor[0])) {
+		if (!anchor || !document.contains(anchor[0])) {
 			anchor = globalAnchors[key] = createElem("div");
 			var css = {};
 			css[main] = 0;
@@ -621,4 +621,5 @@
 			}
 		});
 	});
+
 }));

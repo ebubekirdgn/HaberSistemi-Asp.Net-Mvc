@@ -9,6 +9,7 @@ namespace HaberSistemi.Data.DataContext
 {
     public class HaberContext : DbContext
     {
+
         public DbSet<Kullanici> Kullanici { get; set; }
 
         public DbSet<Rol> Rol { get; set; }
@@ -22,5 +23,6 @@ namespace HaberSistemi.Data.DataContext
         public DbSet<Etiket> Etiket { get; set; }
 
         public DbSet<Slider> Slider { get; set; }
+
     }
 }
